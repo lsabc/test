@@ -24,7 +24,7 @@ def loss_fn(y_true, y_pred):
     num_classes = y_pred.shape[1]
     y_true = tf.reshape(y_true, [-1])
     y_true = tf.cast(y_true, tf.int32)
-    loss = tf.reduce_sum(tf.one_hot(y_true, num_classes)*tf.math.log(y_pred))
+    loss = tf.reduce_sum(tf.one_hot(y_true, num_classes)*tf.math.log(y_pred)) # faulty statement
     loss = -loss/BATCH_SIZE
     tf.debugging.assert_all_finite(loss, "NAN Loss...")
     return loss
