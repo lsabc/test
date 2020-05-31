@@ -43,3 +43,16 @@ with strategy.scope():
 model.fit(train_ds, steps_per_epoch=60000/BATCH_SIZE, epochs=50, verbose=2)
 
 model.evaluate(x_test, y_test, verbose=2)
+
+model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
+    filepath=checkpoint_filepath,
+    save_weights_only=True,
+    monitor='val_acc',
+    mode='max',
+    save_best_only=True)
+
+model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(......)
+
+# Model weights are saved at the end of every epoch, if it's the best seen
+# so far.
+model.fit(epochs=EPOCHS, callbacks=[model_checkpoint_callback])
